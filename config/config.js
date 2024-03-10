@@ -8,7 +8,7 @@ const config = {
     production: {
         port: process.env.PROD_PORT || 8080,
         database: {
-            url: process.env.MONGODB_PROD_URI,
+            url: process.env.MONGODB_DEV_URI,
         },
     },
 };
