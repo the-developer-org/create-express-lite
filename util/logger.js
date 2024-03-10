@@ -5,18 +5,30 @@ const DailyRotateFile = require("winston-daily-rotate-file");
 const logFolder = "./Logs";
 
 const errorLogFileFormat = printf(
-    ({ level, message, req, timestamp, errorCode, user, uuid }) => {
+    ({ level, message, timestamp, errorCode, req, source, reason, stack }) => {
         let logMessage = timestamp ? `[${timestamp}] ` : "";
         logMessage += level ? `${level}: ` : "";
-
         if (req && req.method && req.url) {
-            logMessage += `${req.method} request to ${req.url} `;
+            logMessage += `${req.method} request to ${req.url} failed. `;
         }
-
-        logMessage += `failed. Error code: ${errorCode}. Error message: ${message}. {"user": ${
-            req && req.user ? req.user.email : user
-        }} `;
-
+        if (source) {
+            logMessage += `Source: ${source}. `;
+        }
+        if (errorCode) {
+            logMessage += `Code: ${errorCode}. `;
+        }
+        if (message) {
+            logMessage += `Message: ${message}. `;
+        }
+        if (reason) {
+            logMessage += `Reason: ${reason}. `;
+        }
+        if (stack) {
+            logMessage += `Stack: ${stack}. `;
+        }
+        if (req && req.user) {
+            logMessage += `{"user": ${req.user.email}} `;
+        }
         return logMessage;
     }
 );
@@ -24,7 +36,7 @@ const errorLogFileFormat = printf(
 const customFormatConsole = printf(({ level, message, timestamp }) => {
     let logMessage = timestamp ? `[${timestamp}] ` : "";
     logMessage += level ? `${level}: ` : "";
-    if (message) logMessage += `Message: ${message}`;
+    logMessage += message ? message : "";
     return logMessage;
 });
 
@@ -88,11 +100,20 @@ const Logger = createLogger({
 });
 
 process.on("unhandledRejection", (reason, promise) => {
-    Logger.error(`Unhandled Rejection at: ${promise}, reason: ${reason}`);
+    Logger.log("error", {
+        message: `Unhandled Rejection.`,
+        source: promise,
+        reason: reason,
+        stack: reason.stack,
+    });
 });
 
 process.on("uncaughtException", (error) => {
-    Logger.error(`Uncaught Exception: ${error.message}`);
+    Logger.log("error", {
+        message: `Uncaught Exception`,
+        reason: error.message,
+        stack: error.stack,
+    });
     process.exit(1);
 });
 
