@@ -109,7 +109,6 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 process.on("uncaughtException", (error) => {
-    console.log(error);
     Logger.log("error", {
         message: `Uncaught Exception`,
         reason: error.message,
