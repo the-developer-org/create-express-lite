@@ -3,15 +3,13 @@ const config = require("./config");
 const Logger = require("../util/logger");
 const connectDB = async () => {
     try {
-        await mongoose.connect(config.database.url, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(config.database.url);
         const databaseStartTime = new Date().toLocaleString();
         Logger.log("info", {
             message: `MongoDB server successfully connected on ${databaseStartTime}`,
         });
     } catch (error) {
+        console.log("DATABASE.JS FILE");
         Logger.log("error", {
             errorCode: "MONGOOSERROR",
             message: "Error while connecting to MongoDB server",
