@@ -93,4 +93,4 @@ If you encounter any issues, have suggestions, or want to contribute to create-e
 
 This project is licensed under the [MIT License](LICENSE).
 
-Happy coding with create-express-lite!
+Happy coding with create-express-lite
