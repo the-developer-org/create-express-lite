@@ -1,18 +1,16 @@
 const { createLogger, format, transports } = require("winston");
 const { combine, timestamp, printf, colorize, align, json } = format;
 const DailyRotateFile = require("winston-daily-rotate-file");
+const { Console } = require("winston/lib/winston/transports");
 
 const logFolder = "./Logs";
 
 const errorLogFileFormat = printf(
-    ({ level, message, timestamp, errorCode, req, source, reason, stack }) => {
+    ({ level, message, timestamp, errorCode, req, user }) => {
         let logMessage = timestamp ? `[${timestamp}] ` : "";
         logMessage += level ? `${level}: ` : "";
-        if (req && req.method && req.url) {
-            logMessage += `${req.method} request to ${req.url} failed. `;
-        }
-        if (source) {
-            logMessage += `Source: ${source}. `;
+        if (req && req.method && req.originalUrl) {
+            logMessage += `${req.method} request to ${req.originalUrl} failed. `;
         }
         if (errorCode) {
             logMessage += `Code: ${errorCode}. `;
@@ -20,14 +18,10 @@ const errorLogFileFormat = printf(
         if (message) {
             logMessage += `Message: ${message}. `;
         }
-        if (reason) {
-            logMessage += `Reason: ${reason}. `;
-        }
-        if (stack) {
-            logMessage += `Stack: ${stack}. `;
-        }
         if (req && req.user) {
             logMessage += `{"user": ${req.user.email}} `;
+        } else if (user) {
+            logMessage += `{"user": ${user.email}} `;
         }
         return logMessage;
     }
@@ -100,6 +94,8 @@ const Logger = createLogger({
 });
 
 process.on("unhandledRejection", (reason, promise) => {
+    console.log("UNHANDLED RJECTION LOGGER");
+    console.log(reason);
     Logger.log("error", {
         message: `Unhandled Rejection.`,
         source: promise,
@@ -109,6 +105,8 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 process.on("uncaughtException", (error) => {
+    console.log("UNCAUGHT EXCEPTION LOGGER");
+    console.log(error);
     Logger.log("error", {
         message: `Uncaught Exception`,
         reason: error.message,
