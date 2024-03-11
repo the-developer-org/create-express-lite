@@ -11,6 +11,7 @@ const server = app.listen(config.port, () => {
 });
 
 server.on("error", (error) => {
+    console.log("SERVER ON ERROR");
     if (error.syscall !== "listen") {
         Logger.log("error", {
             message: `Unknown server error`,
@@ -21,6 +22,7 @@ server.on("error", (error) => {
     }
 });
 process.on("uncaughtException", (error) => {
+    console.log("SEVER ON UNCAUGHT EXCEPTION");
     Logger.log("error", {
         message: `Uncaught Exception`,
         reason: error.message,
