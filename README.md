@@ -1,121 +1,144 @@
-# create-express-lite
+# Create Express App
 
-create-express-lite is a command-line tool that helps you kickstart your Express.js applications by generating a boilerplate code structure. Similar to `create-react-app` for React, `npx-create-express-lite` simplifies the process of setting up a new Express.js project, allowing you to focus on building your application rather than dealing with the initial configuration.
+Simplifies the process of setting up a new project using
+Node.js, Express, and Mongoose and REST API's.
 
-## Getting Started
+By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, allowing you to focus on building your application rather than dealing with the initial configuration.. For more details, check the features list below.
 
-To create a new Express.js project using create-express-lite, follow these simple steps:
+- [Setting up Express app](#creating-an-app) – How to setup an express app using create-express-lite.
+- Create Express Lite works on macOS and Windows.
+- If something doesn’t work, please [file an issue](https://github.com/the-developer-org/create-express-lite/issues/new).
 
-1. Open your terminal or command prompt.
+## Quick Overview
 
-2. Run the following command:
+```sh
+npx create-express-lite my-app
+cd my-app
+npm run dev
+```
 
-   ```bash
-   npx create-express-lite <your-folder-name>
-   ```
+If you've previously installed `create-lite-app` globally via `npm install -g create-express-lite`, you can aslo create the app using `create-express-lite my-app`.
 
-   Replace `<your-folder-name>` with the desired name for your project.
+If you are running in development environment the app will be running at [http://localhost:3000](http://localhost:3000).
 
-   or
+## Creating an App
 
-   ```bash
-   npx create-express-lite .
-   ```
+To create a new app, you may choose one of the following methods:
 
-   To get the project files in the current directory
+### npx
 
-3. The tool will prompt you for some basic configuration options, such as package manager (npm or yarn) and whether you want to include additional features like database integration or authentication.
+```sh
+npx create-express-lite my-app
+```
 
-4. Once the setup is complete, navigate to your project folder(skip if you are already in your project folder):
+### npm
 
-   ```bash
-   cd <your-folder-name>
-   ```
+```sh
+npm i create-express-lite
+create-express-lite my-app
+```
 
-5. Start your Express.js server:
-
-   ```bash
-   npm start
-   ```
-
-Now you have a basic Express.js application up and running!
-
-## Features
-
-- **Quick Setup:** Create a new Express.js project with just one command.
-
-- **Customizable:** During project creation, you can choose additional features and configurations according to your project requirements.
-
-- **Opinionated Structure:** Follows a recommended project structure to maintain consistency and best practices.
-
-## Directory Structure
-
-The generated project structure follows best practices for organizing your Express.js application. Here's an overview:
+It will create a directory called `my-app` inside the current folder.
+Inside that directory, it will generate the initial project structure and install the transitive dependencies:
 
 ```
-my-express-app/
+my-app/
 │
 ├── config/
-│   ├── config.js                   // General configurations
-│   ├── database.js                 // Database connection setup
-│   ├── logger.js                   // Logging configuration
-│   ├── email.config.js   // Additional configurations (if needed)
-│   └── ...                         // Other configuration files
+│   ├── config.js
+│   ├── database.js
+│   ├── logger.js
+│   ├── email.config.js
+│   └── ...
 │
 ├── controllers/
-│   ├── authController.js           // Controllers for authentication-related logic
-│   └── ...                         // Other controllers
+│   ├── authController.js
+│   └── ...
 │
 ├── middlewares/
-│   ├── error.js                    // Error handling middleware
-│   ├── validate.js                 // Validation middleware
-│   └── ...                         // Other middleware modules
+│   ├── error.js
+│   ├── validate.js
+│   └── ...
 │
 ├── models/
-│   ├── User.js                     // User model (Mongoose schema)
-│   ├── pluginToJSON.js             // Plugin to convert model to JSON
-│   └── ...                         // Other model files
+│   ├── User.js
+│   ├── plugins
+│       └── toJSON.plugin.js
 │
 ├── routes/
-│   ├── authRoutes.js               // Routes for authentication
-│   ├── otherRoutes.js              // Other routes
-│   └── ...                         // Other route files
+│   ├── authRoutes.js
+│   └── ...
 │
 ├── services/
-│   ├── userService.js              // Service for user-related operations
-│   ├── authService.js              // Service for authentication-related operations
-│   ├── emailService.js             // Service for sending emails
-│   └── ...                         // Other service modules
+│   ├── userService.js
+│   ├── authService.js
+│   ├── emailService.js
+│   └── ...
 │
 ├── templates/
-│   ├── emailTemplates/             // Templates for email content
-│   └── ...                         // Other template files
+│   ├── emailTemplates/
+│   └── ...
 │
 ├── utils/
-│   ├── apiError.js                 // Utility for handling API errors
-│   ├── async.js                    // Utility for handling asynchronous operations
-│   ├── errorMessage.js             // Utility for generating error messages
-│   ├── pick.js                     // Utility for picking specific properties from objects
-│   └── ...                         // Other utility modules
+│   ├── apiError.js
+│   ├── async.js
+│   ├── errorMessage.js
+│   ├── pick.js
+│   └── ...
 │
 ├── validations/
-│   ├── authValidations.js          // Validations for authentication
-│   ├── customValidations.js        // Custom validations
-│   ├── validationHelper.js         // Helper functions for validation
-│   └── ...                         // Other validation files
+│   ├── authValidations.js
+│   ├── customValidations.js
+│   ├── validationHelper.js
+│   └── ...
 │
-├── .env                            // Environment variables
-├── .eslintrc.json                  // ESLint configuration
-├── .gitignore                      // Git ignore file
-├── .prettierrc.json                // Prettier configuration
-├── app.js                          // Express application setup
-├── package.json                    // Project dependencies and scripts
-└── server.js                       // Entry point for running the server
-
+├── .env
+├── .eslintrc.json
+├── .gitignore
+├── .prettierrc.json
+├── app.js
+├── package.json
+└── server.js
 
 ```
 
-Feel free to customize the generated code to suit your specific needs.
+Once the installation is done, you can open your project folder:
+
+```sh
+cd my-app
+```
+
+Inside the newly created project, you can run some built-in commands:
+
+### `npm run dev` or `npm run prod`
+
+Runs the app in development mode.
+The app will be available at [http://localhost:3000](http://localhost:3000) and is up and running.
+
+The page will automatically reload if you make changes to the code when in development environment.
+You will see the build errors and lint warnings in the console.
+
+## User Guide
+
+You can find detailed instructions on using Create React App and many tips in [its documentation]().
+
+## What’s Included?
+
+Your environment will have everything you need to build a express application:
+
+- NoSQL database: MongoDB object data modeling using Mongoose
+- Validation: request data validation using Joi
+- Logging: logging using winston
+- Error handling: centralized error handling mechanism
+- Dependency management: with npm
+- Environment variables: using dotenv
+- Security: set security HTTP headers using helmet
+- CORS: Cross-Origin Resource-Sharing enabled using cors
+- Compression: gzip compression with compression
+- Git hooks: with husky
+- Linting: with ESLint and Prettier
+
+The tradeoff is that **these tools are preconfigured to work in a specific way**. If your project needs more customization, you can customize it, but then you will need to maintain this configuration.
 
 ## Contributing
 
@@ -123,6 +146,6 @@ If you encounter any issues, have suggestions, or want to contribute to create-e
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+Create Express Lite is open source software [licensed as MIT](https://github.com/the-developer-org/create-express-lite/blob/main/LICENSE)
 
 Happy coding with create-express-lite
