@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MudassirQuraishi/portfolio-generator-be.git"
+    "url": "git+https://github.com/the-developer-org/create-express-lite.git"
   },
   "author": "Mudassir Quraishi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MudassirQuraishi/portfolio-generator-be/issues"
+    "url": "https://github.com/the-developer-org/create-express-lite/issues"
   },
-  "homepage": "https://github.com/MudassirQuraishi/portfolio-generator-be#readme",
+  "homepage": "https://github.com/the-developer-org/create-express-lite#README",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
