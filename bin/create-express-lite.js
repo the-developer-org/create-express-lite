@@ -87,7 +87,7 @@ async function setup() {
     await runCmd('npx rimraf ./.git');
 
     fs.unlinkSync(path.join(appPath, 'CONTRIBUTION.md'));
-    fs.unlinkSync(path.join(appPath, 'bin', 'createNodejsApp.js'));
+    fs.unlinkSync(path.join(appPath, 'bin', 'create-express-lite.js'));
     fs.rmdirSync(path.join(appPath, 'bin'));
     fs.unlinkSync(path.join(appPath, 'package-lock.json'));
 
