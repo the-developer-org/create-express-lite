@@ -98,8 +98,8 @@ my-app/
 List of available routes:
 
 **Auth routes**:\
-`POST /auth/v1/signup` - signup\
-`POST /auth/v1/login` - login\
+`POST /auth/v1/signup` - signup
+`POST /auth/v1/login` - login
 
 **email**:\
 `POST /auth/v1/verify-email` - verify email

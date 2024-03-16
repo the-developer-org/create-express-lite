@@ -1,4 +1,4 @@
-# Create Express App
+# Create Express Lite
 
 Simplifies the process of setting up a new project using Node.js, Express, and Mongoose and REST API's.
 
@@ -16,7 +16,7 @@ cd my-app
 npm run dev
 ```
 
-If you've previously installed `create-lite-app` globally via `npm install -g create-express-lite`, you can aslo create the app using `create-express-lite my-app`.
+If you've previously installed `create-express-lite` globally via `npm install -g create-express-lite`, you can aslo create the app using `create-express-lite my-app`.
 
 If you are running in development environment the app will be running at [http://localhost:3000](http://localhost:3000).
 
