@@ -3,11 +3,18 @@
   "version": "1.1.1",
   "description": "",
   "main": "index.js",
+  "keywords": [
+    "utility",
+    "express",
+    "awesome",
+    "amazing",
+    "npm",
+    "boiler-plate"
+  ],
   "bin": {
     "create-express-lite": "./bin/create-express-lite.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prod": "NODE_ENV=production node server.js",
     "dev": "NODE_ENV=development nodemon server.js"
   },
