@@ -1,7 +1,6 @@
 # Create Express App
 
-Simplifies the process of setting up a new project using
-Node.js, Express, and Mongoose and REST API's.
+Simplifies the process of setting up a new project using Node.js, Express, and Mongoose and REST API's.
 
 By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, allowing you to focus on building your application rather than dealing with the initial configuration.. For more details, check the features list below.
 
@@ -120,7 +119,7 @@ You will see the build errors and lint warnings in the console.
 
 ## User Guide
 
-You can find detailed instructions on using Create React App and many tips in [its documentation]().
+You can find detailed instructions on using Create Express Lite and many tips in [its documentation](DOCUMENTATION.md).
 
 ## What’s Included?
 
