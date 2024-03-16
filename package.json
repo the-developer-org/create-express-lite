@@ -1,37 +1,54 @@
 {
-    "name": "create-express-lite",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "prod": "SET NODE_ENV=production && node server.js",
-        "dev": "SET NODE_ENV=development && nodemon server.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/the-developer-org/create-express-lite.git"
-    },
-    "keywords": [
-        "express"
-    ],
-    "author": "the-developer-org",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/the-developer-org/create-express-lite/issues"
-    },
-    "homepage": "https://github.com/the-developer-org/create-express-lite#readme",
-    "dependencies": {
-        "bcrypt": "^5.1.1",
-        "dotenv": "^16.4.5",
-        "express": "^4.18.3",
-        "joi": "^17.12.2",
-        "mongoose": "^8.2.1",
-        "validator": "^13.11.0",
-        "winston": "^3.12.0",
-        "winston-daily-rotate-file": "^5.0.0"
-    },
-    "devDependencies": {
-        "nodemon": "^3.1.0"
+  "name": "portfolio-generator-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "NODE_ENV=production node server.js",
+    "dev": "NODE_ENV=development nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MudassirQuraishi/portfolio-generator-be.git"
+  },
+  "author": "Mudassir Quraishi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MudassirQuraishi/portfolio-generator-be/issues"
+  },
+  "homepage": "https://github.com/MudassirQuraishi/portfolio-generator-be#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "http-status": "^1.7.4",
+    "joi": "^17.12.2",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.30.1",
+    "mongoose": "^8.2.1",
+    "nodemailer": "^6.9.12",
+    "uuid": "^9.0.1",
+    "validator": "^13.11.0",
+    "winston": "^3.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "husky": "^9.0.11",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint - fix",
+      "prettier -write",
+      "git add"
+    ]
+  }
 }

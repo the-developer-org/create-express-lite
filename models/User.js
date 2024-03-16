@@ -1,13 +1,28 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const validator = require("validator");
+const {
+    passwordValidation,
+    emailValidation,
+} = require("../validations/validations.helper");
 
 const toJSON = require("./plugins/toJSON.plugin");
+
 const userSchema = mongoose.Schema(
     {
-        name: {
+        username: {
+            type: String,
+            unique: true,
+            required: true,
+            trim: true,
+            lowercase: true,
+        },
+        fullName: {
             type: String,
             required: true,
+            trim: true,
+        },
+        phoneNumber: {
+            type: String,
             trim: true,
         },
         email: {
@@ -16,33 +31,26 @@ const userSchema = mongoose.Schema(
             unique: true,
             trim: true,
             lowercase: true,
-            validate(value) {
-                if (!validator.isEmail(value)) {
-                    throw new Error("Invalid email");
-                }
-            },
+            validate: emailValidation,
         },
         password: {
             type: String,
             required: true,
             trim: true,
-            validate(value) {
-                if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-                    throw new Error(
-                        "Password must contain at least one number and one letter"
-                    );
-                }
-            },
+            validate: passwordValidation,
             private: true,
         },
-        // role : {
-        //     type : String,
-        //     eum : ['user', 'admin'],
-        //     default : 'user'
-        // },
+        role: {
+            type: String,
+            enum: ["user", "admin"],
+            default: "user",
+        },
         isEmailVerified: {
             type: Boolean,
             default: false,
+        },
+        emailVerificationToken: {
+            type: String,
         },
     },
     {
@@ -64,8 +72,9 @@ userSchema.methods.isPasswordMatch = async function (password) {
 
 userSchema.pre("save", async function (next) {
     const user = this;
+    const salt = Number(process.env.HASH_SALT);
     if (user.isModified("password")) {
-        user.password = await bcrypt.hash(user.password, 8);
+        user.password = await bcrypt.hash(user.password, salt);
     }
     next();
 });

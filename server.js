@@ -1,32 +1,21 @@
 require("dotenv").config();
+const moment = require("moment");
 const app = require("./app");
 const config = require("./config/config");
-const Logger = require("./util/logger");
+const { Logger } = require("./config/logger");
 
 const server = app.listen(config.port, () => {
-    const serverStartTime = new Date().toLocaleString();
+    const serverStartTime = moment().format();
     Logger.log("info", {
         message: `Backend server started at port ${config.port} on ${serverStartTime}`,
     });
 });
 
 server.on("error", (error) => {
-    console.log("SERVER ON ERROR");
-    if (error.syscall !== "listen") {
-        Logger.log("error", {
-            message: `Unknown server error`,
-            reason: error.message,
-            stack: error.stack,
-        });
-        process.exit(1);
-    }
+    console.log(error);
+    process.exit(1);
 });
 process.on("uncaughtException", (error) => {
-    console.log("SEVER ON UNCAUGHT EXCEPTION");
-    Logger.log("error", {
-        message: `Uncaught Exception`,
-        reason: error.message,
-        stack: error.stack,
-    });
+    console.log(error);
     process.exit(1);
 });

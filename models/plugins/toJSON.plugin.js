@@ -1,9 +1,3 @@
-/**
- * A mongoose schema plugin which applies the following in the toJSON transform call:
- *  - removes __v, createdAt, updatedAt, and any path that has private: true
- *  - replaces _id with id
- */
-
 const deleteAtPath = (obj, path, index) => {
     if (index === path.length - 1) {
         delete obj[path[index]];

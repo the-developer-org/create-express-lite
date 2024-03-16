@@ -1,7 +1,5 @@
 const { createLogger, format, transports } = require("winston");
 const { combine, timestamp, printf, colorize, align, json } = format;
-const DailyRotateFile = require("winston-daily-rotate-file");
-const { Console } = require("winston/lib/winston/transports");
 
 const logFolder = "./Logs";
 
@@ -61,7 +59,7 @@ const devFileTransport = new transports.File({
     ),
 });
 
-const prodFileTransport = new DailyRotateFile({
+const prodFileTransport = new transports.File({
     filename: `${logFolder}/prodLogs-%DATE%.log`,
     datePattern: "YYYY-MM-DD",
     maxSize: "1m",
@@ -76,7 +74,7 @@ const prodFileTransport = new DailyRotateFile({
     ),
 });
 
-const Logger = createLogger({
+exports.Logger = createLogger({
     levels: {
         error: 0,
         warn: 1,
@@ -92,27 +90,3 @@ const Logger = createLogger({
             : devFileTransport,
     ],
 });
-
-process.on("unhandledRejection", (reason, promise) => {
-    console.log("UNHANDLED RJECTION LOGGER");
-    console.log(reason);
-    Logger.log("error", {
-        message: `Unhandled Rejection.`,
-        source: promise,
-        reason: reason,
-        stack: reason.stack,
-    });
-});
-
-process.on("uncaughtException", (error) => {
-    console.log("UNCAUGHT EXCEPTION LOGGER");
-    console.log(error);
-    Logger.log("error", {
-        message: `Uncaught Exception`,
-        reason: error.message,
-        stack: error.stack,
-    });
-    process.exit(1);
-});
-
-module.exports = Logger;

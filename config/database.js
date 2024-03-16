@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
+const moment = require("moment");
 const config = require("./config");
-const Logger = require("../util/logger");
-const connectDB = async () => {
+const { Logger } = require("./logger");
+exports.connectDB = async () => {
     try {
         await mongoose.connect(config.database.url);
-        const databaseStartTime = new Date().toLocaleString();
+        const databaseStartTime = moment().format();
         Logger.log("info", {
             message: `MongoDB server successfully connected on ${databaseStartTime}`,
         });
     } catch (error) {
-        console.log("DATABASE.JS FILE");
         Logger.log("error", {
             errorCode: "MONGOOSERROR",
             message: "Error while connecting to MongoDB server",
@@ -19,4 +19,3 @@ const connectDB = async () => {
         });
     }
 };
-module.exports = connectDB;
