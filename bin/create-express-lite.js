@@ -42,7 +42,6 @@ async function setup() {
       );
     }
     const ownPath = process.cwd();
-    console.log(ownPath);
     const userProvidedName = process.argv[2];
     const folderName = userProvidedName === '.' ? '' : userProvidedName;
     let appPath;
@@ -87,7 +86,6 @@ async function setup() {
     console.log('To start the application, navigate to the project directory:');
     console.log(`  cd ${folderName}`);
     console.log('Then run the following command:');
-    console.log('  npm install');
     console.log('  npm run dev\n');
     console.log(
       'Enjoy your production-ready Node.js app, which supports a number of ready-made features!'
